@@ -9,6 +9,12 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 TOKEN = os.environ['TOKEN']
+bot = Bot(token=TOKEN)
+
+def SUfunc(some_photo):
+    """Working with CycleGAN"""
+    return some_photo
+
 def start(update, context):
     update.message.reply_text('Welcome to Xbot!  ~(^o^)~ \nSend me photo and in a few seconds I will show you 3d implementation of it')
 
@@ -16,11 +22,13 @@ def help(update, context):
     update.message.reply_text('All I can is transfer 2d photos to 3d sketch. So send me photo ( ͡❛ -͡❛ )')
 
 def reply(update, context):
-    update.message.reply_text("This will be photo soon, but I'm not working now((")
+    update.message.reply_text("Here is your 3d photo:")
+    kek = bytes(bot.get_file(update.message.photo[2]["file_id"]).download_as_bytearray())
+    print(kek)
+    update.message.reply_photo(photo=SUfunc(kek))
 
 def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
-
 def main():
     updater = Updater(TOKEN, use_context=True)
 
