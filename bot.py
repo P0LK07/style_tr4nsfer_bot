@@ -26,7 +26,7 @@ def reply(update, context):
     update.message.reply_text("Here is your 3d photo:")
     kek = bytes(bot.get_file(update.message.photo[2]["file_id"]).download_as_bytearray())
     print(kek)
-    update.message.reply_photo(photo=SUfunc(kek))
+    update.message.reply_photo(SUfunc(kek))
 
 def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
